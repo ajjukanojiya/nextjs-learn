@@ -22,6 +22,8 @@ export const registerSchema = z
     confirmPassword: z
       .string()
       .min(1, "Please confirm your password"),
+
+      image: z.any().optional(), // FileList object
   })
   .refine(
     (data) => data.password === data.confirmPassword,
@@ -34,7 +36,7 @@ export const registerSchema = z
   export const LoginSchema = z.object({
   email: z.string().email({ message: "Valid email address daalein" }),
   password: z.string().min(1, { message: "Password required hai" }),
-});
+  });
 
   
   export type RegisterInput = z.infer<typeof registerSchema>;

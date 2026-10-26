@@ -5,11 +5,18 @@ import { jwtVerify } from 'jose';
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || 'super-secret-key-change-this-in-env'
 );
-
+console.log('JWT_SECRET',JWT_SECRET)
 export async function middleware(request: NextRequest) {
+// console.log('📍 Current Path:', request.nextUrl.pathname);
+//   console.log('🔍 Search Query:', request.nextUrl.searchParams.get('q'));
+//   console.log('🔗 Full URL:', request.nextUrl.href);
+
+  // return NextResponse.next();
   // 1. Browser dwara bheji gayi HttpOnly cookie extract karein
   const token = request.cookies.get('auth_token')?.value;
   const { pathname } = request.nextUrl;
+
+  console.log('pathname',pathname);
 
   const isProtectedRoute = pathname.startsWith('/dashboardNew');
   const isAuthRoute = pathname === '/login' || pathname === '/register';
